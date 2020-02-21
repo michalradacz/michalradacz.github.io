@@ -1,3 +1,5 @@
+remote_theme: rohanchandra/type-theme
+
 # SITE CONFIGURATION
 baseurl: "/"
 url: "https://michalradacz.github.io/"
