@@ -11,7 +11,7 @@ theme_settings:
   avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-  description: "michalrada.cz - webové stránky Michala Rady" # used by search engines
+  description: "michalrada.cz - webové stránky Michala Rady"
 
   # Header and footer text
   header_text: >
@@ -25,7 +25,7 @@ theme_settings:
   behance:
   bitbucket:
   dribbble:
-  facebook: michalradacz
+  facebook: "michalradacz"
   flickr:
   gitlab:
   github: "michalradacz"
@@ -39,7 +39,7 @@ theme_settings:
   stack_exchange:  # Full URL
   steam:
   tumblr:
-  twitter: michalrada
+  twitter: "michalrada"
   wordpress:
   youtube:
 
@@ -50,7 +50,7 @@ theme_settings:
   search: true # Enable the search feature
 
   # Localization strings
-  str_follow_on: "Najdi mě nan"
+  str_follow_on: "Najdi mě na"
   str_rss_follow: "Do tvojí RSS čtečky"
   str_email: "Email"
   str_next_post: "Další příspěvek"
