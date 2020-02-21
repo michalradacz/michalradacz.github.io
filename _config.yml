@@ -1,0 +1,82 @@
+# SITE CONFIGURATION
+baseurl: "/"
+url: "https://michalradacz.github.io/"
+
+# THEME-SPECIFIC CONFIGURATION
+theme_settings:
+  # Meta
+  title: michalrada.cz
+  avatar: assets/img/avatar.png
+  favicon: assets/favicon.ico
+  gravatar: # Email MD5 hash
+  description: "michalrada.cz - webové stránky Michala Rady" # used by search engines
+
+  # Header and footer text
+  header_text: >
+
+  footer_text: >
+
+
+  # Icons
+  rss: true
+  email_address: "kancelar.mr@gmail.com"  # Full email address, e.g. "sam@example.com"
+  behance:
+  bitbucket:
+  dribbble:
+  facebook: michalradacz
+  flickr:
+  gitlab:
+  github: "michalradacz"
+  gitter:
+  google_plus:
+  instagram:
+  linkedin:  # Full URL
+  pinterest:
+  reddit:
+  soundcloud:
+  stack_exchange:  # Full URL
+  steam:
+  tumblr:
+  twitter: michalrada
+  wordpress:
+  youtube:
+
+  # Scripts
+  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  disqus_shortname:
+  katex: true # Enable if using math markup
+  search: true # Enable the search feature
+
+  # Localization strings
+  str_follow_on: "Najdi mě nan"
+  str_rss_follow: "Do tvojí RSS čtečky"
+  str_email: "Email"
+  str_next_post: "Další příspěvek"
+  str_previous_post: "Předchozí příspěvek"
+  str_next_page: "Další stránka"
+  str_previous_page: "Předchozí stránka"
+  str_continue_reading: "Celý příspěvek..."
+  str_javascript_required_disqus: "Please enable JavaScript to view comments."
+  str_search_no_results: "Nic jsme nenašli."
+
+  # Colours, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
+  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
+
+  # Post navigation
+  post_navigation: true
+
+# PAGINATION
+paginate: 10
+paginate_path: "blog/page:num"
+
+# BUILD SETTINGS
+markdown: kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: :compressed
+plugins: [jekyll-paginate]
+exclude:
+  - Gemfile
+  - Gemfile.lock
