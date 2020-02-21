@@ -4,6 +4,8 @@ remote_theme: rohanchandra/type-theme
 baseurl: "/"
 url: "https://michalradacz.github.io/"
 
+site_navigation_sort: "order"
+
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
