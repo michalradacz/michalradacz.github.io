@@ -1,8 +1,7 @@
 ---
-title: Homepage
+title: Index
+layout: home
 order: 1
+subtitle: Homepage
 ---
 
-
-
-Vítejte tady.
