@@ -21,7 +21,7 @@ theme_settings:
       <p>Vítejte na mých stránkách. Pořád na tom makám, ale znáte to s tou kobylou...</p>
   header_text_feature_image:
   footer_text: >
-<p>© 2020 michalrada.cz 
+    <p>© 2020 michalrada.cz</p>
 
   # Icons
   rss: true
