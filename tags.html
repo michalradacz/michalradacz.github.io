@@ -18,12 +18,13 @@ title: Tagy
       {% if post.title != null %}
         <div class="tagged-post">
           <li class="title">
-            {{ post.date | date: "%B %-d, %Y" }}             <a href="{{ post.url | relative_url }}">
+            {{ post.date | date: "%-d.%-m.%Y" }} :              <a href="{{ post.url | relative_url }}">
               {{ post.title }}
             </a>
           </li>
         </div>
       {% endif %}
+</ul>
     {% endfor %}
   {% endunless %}
 {% endfor %}
