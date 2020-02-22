@@ -12,7 +12,7 @@ layout: default
 <main>  <section class="post-content">
 <p><b>    {% if page.subtitle %} {{ page.subtitle }}{% endif %}</b></p>{{ content }}</section>
 </main>
-📁   {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
+<p>📁   {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
 </article>
 
 <!-- Disqus -->
