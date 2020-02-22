@@ -7,4 +7,5 @@ layout: default
     {% if page.subtitle %}<h2 class="subtitle">{{ page.subtitle }}</h2>{% endif %}
   </header>
   <section class="post-content">{{ content }}</section>
+<p>Aktualizováno       {{ page.date | date: "%-d.%-m.%Y" }}
 </article>
