@@ -5,13 +5,14 @@ layout: default
   <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
     <h1 class="title">{{ page.feature-title | default: page.title }}</h1>
     <p class="meta">
-📅      {{ page.date | date: "%-d.%-m. %Y" }}
+📅      {{ page.date | date: "%-d.%-m.%Y" }}
       {% if page.author %} / 👤 {{ page.author }}{% endif %}
     </p>
   </header>
 <main>  <section class="post-content">
 <p><b>    {% if page.subtitle %} {{ page.subtitle }}{% endif %}</b></p>{{ content }}</section>
-  {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
+</main>
+📁   {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
 </article>
 
 <!-- Disqus -->

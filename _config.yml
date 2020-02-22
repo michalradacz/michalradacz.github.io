@@ -18,9 +18,9 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-
+<p>Vítejte na mých stránkách. Pořád na tom makám, ale znáte to s tou kobylou...
   footer_text: >
-
+<p>© 2020 michalrada.cz 
 
   # Icons
   rss: true
