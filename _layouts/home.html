@@ -15,6 +15,7 @@ layout: default
 <ol>
 {% for zprava in site.data.top %}
 <li>{{ zprava.datum }}: {{zprava.text | markdownify }}
+{% endfor %}
 </ol>
 
 <h2>Poslední příspěvky</h2>
