@@ -1,5 +1,6 @@
 ---
 title: Ochrana obyvatelstva
+order: 8
 ---
 
 Ochrana obyvatelstva je vysoce odborná oblast, která se věnuje přípravě a prevenci a řešení mimořádných událostí. Mimořádné události jsou třeba povodně, nebo právě aktuální pandemické situace.
