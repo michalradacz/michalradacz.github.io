@@ -1,14 +1,14 @@
 ---
-title: Projekty
+title: projekt.y
 layout: page
-subtitle: Webové portály a projekty na kterých spolupracuju
+subtitle: Webové portály a projekt.y na kterých spolupracuju
 order: 5
 date: 2020-02-22
 ---
 
-{% for mojeweby in site.weby %}
-  <h2>{{ mojeweby.title }} </h2>
-<p><b> {{mojeweby.subtitle}}</b><p>
-<a href="{{mojeweby.link}}">{{mojeweby.link}}</a>
-<blockquote>{{ mojeweby.content | markdownify }}</blockquote>
+{% for projekt in site.projekty %}
+  <h2>{{ projekt.title }} </h2>
+<p><b> {{projekt.subtitle}}</b><p>
+<a href="{{projekt.link}}">{{projekt.link}}</a>
+<blockquote>{{ projekt.content | markdownify }}</blockquote>
 {% endfor %}

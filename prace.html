@@ -1,0 +1,12 @@
+---
+title: Práce
+layout: page
+subtitle: Čemu se věnuji ve své práci
+order: 4
+date: 2020-03-16
+---
+
+{% for oblast in site.prace %}
+  <h2>{{ oblast.title }} </h2>
+<div>{{ oblast.content | markdownify }}</div>
+{% endfor %}<hr>
