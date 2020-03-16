@@ -1,7 +1,7 @@
 remote_theme: rohanchandra/type-theme
 collections:
-  - projekty
   - prace
+  - projekty
 
 
 # SITE CONFIGURATION
