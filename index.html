@@ -3,3 +3,12 @@ layout: home
 title: Příspěvky
 order: 1
 ---
+
+<h2>Rychlé zprávy</h2>
+
+<ol>
+{% for zprava in site.data.top %}
+<li>{{ zprava.datum }}: {{zprava.text | markdownify }}
+</ol>
+
+<h2>Poslední příspěvky</h2>
