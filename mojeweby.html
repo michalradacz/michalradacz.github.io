@@ -6,11 +6,8 @@ order: 5
 date: 2020-02-22
 ---
 
-<h1>Weby a projekty na kterých spolupracuju</h1>
-
-
 {% for mojeweby in site.weby %}
   <h2>{{ mojeweby.title }} </h2>
-<p><b> {{mojeweby.subtitle}}</b><p><a href="{{mojeweby.link}}>{{mojeweby.link}}
+<p><b> {{mojeweby.subtitle}}</b><p><a href="{{mojeweby.link}}">{{mojeweby.link}}
 <blockquote>{{ mojeweby.content | markdownify }}</blockquote>
 {% endfor %}
