@@ -1,0 +1,8 @@
+---
+title: Moje weby
+---
+
+{% for mojeweby in site.weby %}
+  <h2>{{ mojeweby.title }} </h2>
+  <p>{{ mojeweby.content | markdownify }}</p>
+{% endfor %}
