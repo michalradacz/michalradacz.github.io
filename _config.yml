@@ -51,7 +51,7 @@ theme_settings:
   tumblr:
   twitter: "michalrada"
   wordpress:
-  youtube:
+  youtube:https://www.youtube.com/feed/my_videos?pbjreload=10
 
   # Scripts
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
