@@ -1,0 +1,20 @@
+{
+  "title": "michalrada.cz",
+  "tagline": "Můj asi stý pokus o web",
+  "language": "cs",
+  "color": "gold",
+
+  "copyright": {
+    "name": "Michal Rada",
+    "url": "https://github.com/michalradacz",
+    "year": 2026
+  },
+
+  "menu_links": [
+    { "label": "YT", "url": "https://youtube.com/c/michalrada" }
+  ],
+
+  "footer_links": [
+    { "label": "Homepage", "url": "#aktuality" }
+  ]
+}
