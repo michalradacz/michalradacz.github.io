@@ -22,6 +22,10 @@
     {
       "label": "MD2web miniCMS",
       "url": "https://michalrada.cz/md2web"
+    },
+    {
+      "label": "Správa",
+      "url": "https://michalradacz.github.io/md2web/editor/?owner=michalradacz&repo=michalradacz.github.io&path=pa27"
     }
   ]
 }
