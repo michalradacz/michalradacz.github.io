@@ -1,20 +1,23 @@
 {
-  "title": "Přístupost Apple 2027",
+  "title": "Přístupnost Apple 2027",
   "tagline": "Jak jsme na tom s přístupností systémů a funkcí?",
   "language": "cs",
-  "color": "gold",
-
+  "color": "orange",
   "copyright": {
     "name": "Michal Rada",
     "url": "https://github.com/michalradacz",
     "year": 2026
   },
-
   "menu_links": [
-    { "label": "AppleVis", "url": "https://applevis.com" }
+    {
+      "label": "AppleVis",
+      "url": "https://applevis.com"
+    }
   ],
-
   "footer_links": [
-    { "label": "Homepage", "url": "#aktuality" }
+    {
+      "label": "Homepage",
+      "url": "#aktuality"
+    }
   ]
 }
