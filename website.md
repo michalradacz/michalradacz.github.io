@@ -1,5 +1,8 @@
 # Aktuality
 
+22.6.2026: [Audiopodcast Moc moc moc díky za přáníčka - YouTube](https://www.youtube.com/watch?v=ISEW1GW57N4)
+
+
 7.6.2026: Opouštím platformu micro.blog, jednak nechci platit za něco, co si můžu udělat sám a jednak kdyź sám tvořím miniredakční systém pro mikroweby, tak je trochu ostuda, že bych ho sám nepoužíval. A tak hurá do toho
 
 
@@ -37,17 +40,39 @@ Multisection
 
 ## ✏️Šílené experimenty
 
-Protože mi stran funkcí a třeba i přístupnosti nevyhovují a dost často ani nefungují klasické nástroje, tak jsem se pustil do několika experimentů, kterými jednak trénuju svoje dev skilly a taky tím ukazuju, že i zdánlivě neřešitelné se dá udělat jednoduše a přístupně. - [ ] sem ten podcast k vibecodingu
+Protože mi stran funkcí a třeba i přístupnosti nevyhovují a dost často ani nefungují klasické nástroje, tak jsem se pustil do několika experimentů, kterými jednak trénuju svoje dev skilly a taky tím ukazuju, že i zdánlivě neřešitelné se dá udělat jednoduše a přístupně.
+
+- [x] sem ten podcast k vibecodingu
 
 Aby bylo jasno, tak nechci kazit byznys velkým firmám a nechci dělat konmurenci, víc o důvodech, proč to dělám jsem se rozpovídal v podcastu [Audiopodcast Wibecoding je užitečný, ale zatraceně nejednoduchý - a vy se nenechte napálit](https://youtu.be/jl_3AbUsWmU)
 
 Na mém YouTube kanálu
 
-- [ ] opravit odkaz audiopodcastu k vibecodingu
+- [x] opravit odkaz audiopodcastu k vibecodingu
 
 # Blogísek
 
 articles
+
+## Díky za přáníčka
+
+Datum: 22. 6. 2026
+
+Tagy: Já, bleskovky
+
+Moc díky za všechny přáníčka k narozenínám. Tady je k tomu takový malý děkovný [Audiopodcast Moc moc moc díky za přáníčka - YouTube](https://www.youtube.com/watch?v=ISEW1GW57N4)
+
+## Na netradiční plněné bramborové knedlíky do restaurace Na Kempu v Dolních Počernicích
+
+Datum: 13. 6. 2026
+
+Tagy: dobrůtky, mňam, výlety
+
+Dášenka mě jako překvapení dneska vytáhla na vlak a do Počernic. A já měl ty úplně nejlepšejší bramborový knedlíky. Jejich kouzlo je v tom, že vevnitř není uzený, ale fakt pečený vepřový maso.
+
+Pokud máte rádi plněný knedlíky, měli byste tohle ochutnat. Tradiční uzený je tady nahrazený opravdu klasickým vepřovým pečeným masem, je to prostě úplně jiná liga. A samozřejmě zelí a smažená cibulka, ale to je už samozřejmost. Ale ta náplň, ta vás prostě dostane.
+
+[Restaurace Na kempu - Praha 14 v Mapách Google](https://maps.app.goo.gl/cjZwnbXsKyK1s5E57?g_st=biz.sakao.CopyAsLink.action-extension)
 
 ## Bože, tohle je ale kravina
 
@@ -76,7 +101,7 @@ Migrováno z původního webu na micro.blog
 
 Datum: 14.4.2026
 
-Témata: Život ZP, Osvěta ZP, Postřehy
+Tagy: Život ZP, Osvěta ZP, Postřehy
 
 Je jaro, všechno nám kvete a pučí a s koncem školního roku stoupá žákovská nervozita, ale i se postupně uvolňuje školní rok. A začíná sezóna show ve školách. Tentokrát to i pro mě byla dost neznámá.
 
