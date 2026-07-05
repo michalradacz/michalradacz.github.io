@@ -1180,6 +1180,98 @@ mark.critic {
   .sidebar-inner { grid-template-columns: 1fr; }
 }
 
+/* ===== EMOJI PARAGRAPHS ===== */
+.ep {
+  padding: .85rem 1.1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  border-left: 4px solid;
+  display: flex;
+  gap: .65rem;
+  align-items: flex-start;
+  line-height: 1.6;
+}
+.ep-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  line-height: 1.4;
+  user-select: none;
+}
+.ep-body { flex: 1; min-width: 0; }
+.ep-body p { margin: 0; }
+
+/* 🔴 ❗ ‼️ — Důležité upozornění / chyba — červená */
+.ep-danger {
+  background: #fde8e8;
+  border-left-color: #c0392b;
+  color: #7b1a1a;
+  box-shadow: 0 2px 8px rgba(192,57,43,.15);
+}
+/* ⚠️ 🟡 — Varování — žlutá/oranžová */
+.ep-warning {
+  background: #fef9e7;
+  border-left-color: #e67e22;
+  color: #7d4e00;
+  box-shadow: 0 2px 8px rgba(230,126,34,.12);
+}
+/* ✅ 💚 🟢 — Tip / úspěch — zelená */
+.ep-success {
+  background: #e8f8f0;
+  border-left-color: #27ae60;
+  color: #145a32;
+  box-shadow: 0 2px 8px rgba(39,174,96,.12);
+}
+/* ℹ️ 💡 🔵 — Informace / tip — modrá */
+.ep-info {
+  background: #eaf4fb;
+  border-left-color: #2980b9;
+  color: #1a3a5c;
+  box-shadow: 0 2px 8px rgba(41,128,185,.12);
+}
+/* 📌 🗒️ — Poznámka — šedá */
+.ep-note {
+  background: #f4f4f4;
+  border-left-color: #7f8c8d;
+  color: #2c3e50;
+  box-shadow: 0 2px 8px rgba(127,140,141,.1);
+}
+/* 🔒 🛡️ — Bezpečnost — tmavě modrá */
+.ep-security {
+  background: #eaf0fb;
+  border-left-color: #1a3a6b;
+  color: #1a3a6b;
+  box-shadow: 0 2px 8px rgba(26,58,107,.15);
+}
+/* 💜 🟣 — Poznámka autora / zajímavost — fialová */
+.ep-purple {
+  background: #f5eef8;
+  border-left-color: #8e44ad;
+  color: #4a235a;
+  box-shadow: 0 2px 8px rgba(142,68,173,.12);
+}
+/* 🔥 — Horká novinka / trending — oranžová sytá */
+.ep-hot {
+  background: #fef0e7;
+  border-left-color: #e74c3c;
+  color: #7b2d00;
+  box-shadow: 0 2px 8px rgba(231,76,60,.15);
+}
+/* 📖 — Citace / definice — krémová */
+.ep-quote {
+  background: #fdfaf3;
+  border-left-color: #c9873a;
+  color: #5a4010;
+  box-shadow: 0 2px 8px rgba(201,135,58,.1);
+  font-style: italic;
+}
+/* 🚧 ⚙️ — Rozpracováno / technické — tmavě šedá */
+.ep-wip {
+  background: #f0f0f0;
+  border-left-color: #555;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
 /* ===== PRINT ===== */
 @media print {
   #site-nav, #toolbar, #sidebar, #site-footer { display: none; }
@@ -1320,6 +1412,42 @@ const Engine = (() => {
   // =============================================
   //  MARKDOWN PARSER
   // =============================================
+
+  // Emoji → CSS třída odstavce
+  const EMOJI_P = [
+    { re: /^(❗|‼️|🔴|🚨)/, cls: 'ep-danger' },
+    { re: /^(⚠️|🟡|🟠)/, cls: 'ep-warning' },
+    { re: /^(✅|💚|🟢|☑️)/, cls: 'ep-success' },
+    { re: /^(ℹ️|💡|🔵|👉)/, cls: 'ep-info' },
+    { re: /^(📌|🗒️|📋|🗺️|📝)/, cls: 'ep-note' },
+    { re: /^(🔒|🛡️|🔐|🔑)/, cls: 'ep-security' },
+    { re: /^(💜|🟣|💫)/, cls: 'ep-purple' },
+    { re: /^(🔥|🚀|⚡)/, cls: 'ep-hot' },
+    { re: /^(📖|💬|🗣️|✍️)/, cls: 'ep-quote' },
+    { re: /^(🚧|⚙️|🛠️|🔧)/, cls: 'ep-wip' },
+  ];
+
+  function wrapEmojiParagraph(html) {
+    // Najdi <p> začínající emoji a obal ho do .ep struktury
+    return html.replace(/<p>([\s\S]*?)<\/p>/g, (match, inner) => {
+      // Odstraň leading whitespace/nbsp
+      const trimmed = inner.trimStart();
+      for (const { re, cls } of EMOJI_P) {
+        if (re.test(trimmed)) {
+          // Extrahuj emoji (1-2 znaky unicode)
+          const emojiMatch = trimmed.match(/^(\S+)\s*/);
+          const emoji = emojiMatch ? emojiMatch[1] : '';
+          const rest = trimmed.slice(emoji.length).trimStart();
+          return `<div class="ep ${cls}" role="note">` +
+            `<span class="ep-icon">${emoji}</span>` +
+            `<div class="ep-body">${rest}</div>` +
+            `</div>`;
+        }
+      }
+      return match;
+    });
+  }
+
   function parseMD(md, basePath) {
     let html = md;
 
@@ -1351,6 +1479,16 @@ const Engine = (() => {
     // {>> comment <<}
     html = html.replace(/\{>>([\s\S]*?)<<\}/g, (_, t) =>
       `<span class="critic-comment"><button class="critic-comment-marker" tabindex="0" aria-label="${lang.critic_comment||'Komentář'}: ${escAttr(t)}">💬</button><span class="critic-comment-text" role="tooltip">${escHtml(t)}</span></span>`);
+
+    // News items — inline rendering na místě v textu
+    html = html.replace(/^(\d{4}-\d{1,2}-\d{1,2}|\d{1,2}\.\d{1,2}\.\d{4}|\d{1,2}\/\d{1,2}\/\d{4}):\s*(.*?)$/gm, (fullLine, datePart, rest) => {
+      const parsed = parseNewsDate(fullLine.trim());
+      if (!parsed) return fullLine;
+      const { dow, dateStr } = formatNewsDate(parsed.date);
+      const titleHTML = rest.trim() ? `<div class="news-title">${parseMDInline(rest.trim())}</div>` : '';
+      const anchorId = `news-${parsed.isoKey}`;
+      return `\x00NEWSITEM_START_${anchorId}_${encodeURIComponent(dow)}_${encodeURIComponent(dateStr)}_ENDHDR\x00${titleHTML}\x00NEWSITEM_END\x00`;
+    });
 
     // Tables
     html = html.replace(/^(\|.+\|\n)([ \t]*\|[ \t]*[-:]+[ \t]*\|.+\n)((?:\|.+\|\n?)*)/gm,
@@ -1414,6 +1552,26 @@ const Engine = (() => {
     // Restore code
     html = html.replace(/\x00CODE(\d+)\x00/g, (_, i) => codeBlocks[i]);
     html = html.replace(/\x00ICODE(\d+)\x00/g, (_, i) => inlineCodes[i]);
+
+    // Wrap emoji paragraphs
+    html = wrapEmojiParagraph(html);
+
+    // Assemble news item HTML — collect all lines between NEWSITEM_START and NEWSITEM_END
+    // and wrap them in a news-item card
+    html = html.replace(
+      /\x00NEWSITEM_START_([^_]+)_([^_]+)_([^_]+)_ENDHDR\x00((?:(?!\x00NEWSITEM_END\x00)[\s\S])*?)\x00NEWSITEM_END\x00/g,
+      (_, anchorId, dowEnc, dateStrEnc, bodyContent) => {
+        const dow = decodeURIComponent(dowEnc);
+        const dateStr = decodeURIComponent(dateStrEnc);
+        // bodyContent může obsahovat title + tělo novinky (odstavce)
+        return `<div class="news-item" id="${anchorId}">` +
+          `<div class="news-date-header">` +
+          `<span class="news-date-icon">📅</span>` +
+          `<span class="news-dow">${escHtml(dow)}</span>` +
+          `<span class="news-date">${escHtml(dateStr)}</span>` +
+          `</div>${bodyContent}</div>`;
+      }
+    );
 
     return html;
   }
@@ -1704,10 +1862,7 @@ const Engine = (() => {
     // Build TOC
     buildTOC(sec.headings);
 
-    // Render news items into page (before TOC/links — must happen after innerHTML set)
-    if (sec.hasNews && sec.newsItems && sec.newsItems.length) {
-      renderNewsItems(sec.newsItems, pageContent);
-    }
+    // Novinky se renderují inline přímo v parseMD na místě kde jsou v textu
 
     // Build external links sidebar section
     buildExtLinks(sec.parsedHTML);
@@ -1835,52 +1990,40 @@ const Engine = (() => {
   }
 
   // Parse rawContent and split into news items + regular MD
-  // Returns { hasNews, newsItems, regularMD }
-  // newsItems: [{isoKey, date, title, bodyMD}]
+  // Extrahuje news items pro sidebar kalendář — NEPŘESOUVÁ je z textu.
+  // Novinky zůstávají na svém místě v MD a renderují se inline přes parseMD.
   function extractNewsItems(rawContent) {
     const lines = rawContent.split('\n');
     const newsItems = [];
-    const regularLines = [];
     let i = 0;
 
     while (i < lines.length) {
       const line = lines[i];
       const parsed = parseNewsDate(line.trim());
-
       if (parsed) {
-        // First line after date prefix is the title (inline rest of line)
-        // Subsequent indented/non-empty lines before next date entry are the body
-        const titleFirstLine = parsed.rest;
         const bodyLines = [];
-
         i++;
         while (i < lines.length) {
-          const nextLine = lines[i];
-          // Stop if next line starts a new news item
-          if (parseNewsDate(nextLine.trim())) break;
-          bodyLines.push(nextLine);
+          if (parseNewsDate(lines[i].trim())) break;
+          bodyLines.push(lines[i]);
           i++;
         }
-
-        // Trim trailing empty lines from body
         while (bodyLines.length && !bodyLines[bodyLines.length - 1].trim()) bodyLines.pop();
-
         newsItems.push({
           isoKey: parsed.isoKey,
           date: parsed.date,
-          title: titleFirstLine,
+          title: parsed.rest,
           bodyMD: bodyLines.join('\n')
         });
       } else {
-        regularLines.push(line);
         i++;
       }
     }
 
     return {
       hasNews: newsItems.length > 0,
-      newsItems: newsItems.sort((a, b) => b.date - a.date), // newest first
-      regularMD: regularLines.join('\n')
+      newsItems: newsItems, // pořadí z MD, pro kalendář
+      regularMD: rawContent  // původní obsah beze změny — novinky se renderují inline
     };
   }
 
@@ -1902,7 +2045,7 @@ const Engine = (() => {
       const header = document.createElement('div');
       header.className = 'news-date-header';
       header.innerHTML =
-        `<span class="news-date-icon" aria-hidden="true">📅</span>` +
+        `<span class="news-date-icon">📅</span>` +
         `<span class="news-dow">${escHtml(dow)}</span>` +
         `<span class="news-date">${escHtml(dateStr)}</span>`;
 
@@ -1927,12 +2070,14 @@ const Engine = (() => {
       ul.appendChild(li);
     });
 
-    // Insert before first h2 or append
-    const firstH2 = pageContentEl.querySelector('h2');
-    if (firstH2) {
-      pageContentEl.insertBefore(ul, firstH2);
-    } else {
+    // Vložit hned za h1 (nadpis stránky) — před zbytkem obsahu
+    const pageH1 = pageContentEl.querySelector('h1');
+    if (pageH1 && pageH1.nextSibling) {
+      pageContentEl.insertBefore(ul, pageH1.nextSibling);
+    } else if (pageH1) {
       pageContentEl.appendChild(ul);
+    } else {
+      pageContentEl.prepend(ul);
     }
 
     // Activate internal links within news items
@@ -2632,10 +2777,19 @@ const Engine = (() => {
 
       // Load content
       loadingText.textContent = 'Načítám obsah…';
-      const mdText = await fetchText('./website.md');
+      // workpath: optional base URL for website.md and sidebar.md
+      // If set, content files are loaded from that URL instead of ./ 
+      function resolveContentUrl(filename) {
+        const wp = (config.workpath || '').trim().replace(/\/+$/, '');
+        if (!wp) return './' + filename;
+        const base = /^https?:\/\//i.test(wp) ? wp : 'https://' + wp;
+        return base + '/' + filename;
+      }
+
+      const mdText = await fetchText(resolveContentUrl('website.md'));
 
       // Load sidebar (optional)
-      try { sidebarMD = await fetchText('./sidebar.md'); } catch { sidebarMD = ''; }
+      try { sidebarMD = await fetchText(resolveContentUrl('sidebar.md')); } catch { sidebarMD = ''; }
 
       // Parse sections — groups have no rawContent, skip parsing for them
       const rawSections = splitSections(mdText);
