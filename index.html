@@ -1480,16 +1480,6 @@ const Engine = (() => {
     html = html.replace(/\{>>([\s\S]*?)<<\}/g, (_, t) =>
       `<span class="critic-comment"><button class="critic-comment-marker" tabindex="0" aria-label="${lang.critic_comment||'Komentář'}: ${escAttr(t)}">💬</button><span class="critic-comment-text" role="tooltip">${escHtml(t)}</span></span>`);
 
-    // News items — inline rendering na místě v textu
-    html = html.replace(/^(\d{4}-\d{1,2}-\d{1,2}|\d{1,2}\.\d{1,2}\.\d{4}|\d{1,2}\/\d{1,2}\/\d{4}):\s*(.*?)$/gm, (fullLine, datePart, rest) => {
-      const parsed = parseNewsDate(fullLine.trim());
-      if (!parsed) return fullLine;
-      const { dow, dateStr } = formatNewsDate(parsed.date);
-      const titleHTML = rest.trim() ? `<div class="news-title">${parseMDInline(rest.trim())}</div>` : '';
-      const anchorId = `news-${parsed.isoKey}`;
-      return `\x00NEWSITEM_START_${anchorId}_${encodeURIComponent(dow)}_${encodeURIComponent(dateStr)}_ENDHDR\x00${titleHTML}\x00NEWSITEM_END\x00`;
-    });
-
     // Tables
     html = html.replace(/^(\|.+\|\n)([ \t]*\|[ \t]*[-:]+[ \t]*\|.+\n)((?:\|.+\|\n?)*)/gm,
       (_, head, sep, body) => {
@@ -1555,23 +1545,6 @@ const Engine = (() => {
 
     // Wrap emoji paragraphs
     html = wrapEmojiParagraph(html);
-
-    // Assemble news item HTML — collect all lines between NEWSITEM_START and NEWSITEM_END
-    // and wrap them in a news-item card
-    html = html.replace(
-      /\x00NEWSITEM_START_([^_]+)_([^_]+)_([^_]+)_ENDHDR\x00((?:(?!\x00NEWSITEM_END\x00)[\s\S])*?)\x00NEWSITEM_END\x00/g,
-      (_, anchorId, dowEnc, dateStrEnc, bodyContent) => {
-        const dow = decodeURIComponent(dowEnc);
-        const dateStr = decodeURIComponent(dateStrEnc);
-        // bodyContent může obsahovat title + tělo novinky (odstavce)
-        return `<div class="news-item" id="${anchorId}">` +
-          `<div class="news-date-header">` +
-          `<span class="news-date-icon">📅</span>` +
-          `<span class="news-dow">${escHtml(dow)}</span>` +
-          `<span class="news-date">${escHtml(dateStr)}</span>` +
-          `</div>${bodyContent}</div>`;
-      }
-    );
 
     return html;
   }
@@ -1862,7 +1835,10 @@ const Engine = (() => {
     // Build TOC
     buildTOC(sec.headings);
 
-    // Novinky se renderují inline přímo v parseMD na místě kde jsou v textu
+    // Render news items
+    if (sec.hasNews && sec.newsItems && sec.newsItems.length) {
+      renderNewsItems(sec.newsItems, pageContent);
+    }
 
     // Build external links sidebar section
     buildExtLinks(sec.parsedHTML);
@@ -1990,17 +1966,19 @@ const Engine = (() => {
   }
 
   // Parse rawContent and split into news items + regular MD
-  // Extrahuje news items pro sidebar kalendář — NEPŘESOUVÁ je z textu.
-  // Novinky zůstávají na svém místě v MD a renderují se inline přes parseMD.
+  // Returns { hasNews, newsItems, regularMD }
   function extractNewsItems(rawContent) {
     const lines = rawContent.split('\n');
     const newsItems = [];
+    const regularLines = [];
     let i = 0;
 
     while (i < lines.length) {
       const line = lines[i];
       const parsed = parseNewsDate(line.trim());
+
       if (parsed) {
+        const titleFirstLine = parsed.rest;
         const bodyLines = [];
         i++;
         while (i < lines.length) {
@@ -2012,18 +1990,19 @@ const Engine = (() => {
         newsItems.push({
           isoKey: parsed.isoKey,
           date: parsed.date,
-          title: parsed.rest,
+          title: titleFirstLine,
           bodyMD: bodyLines.join('\n')
         });
       } else {
+        regularLines.push(line);
         i++;
       }
     }
 
     return {
       hasNews: newsItems.length > 0,
-      newsItems: newsItems, // pořadí z MD, pro kalendář
-      regularMD: rawContent  // původní obsah beze změny — novinky se renderují inline
+      newsItems: newsItems,
+      regularMD: regularLines.join('\n')
     };
   }
 
@@ -2070,14 +2049,12 @@ const Engine = (() => {
       ul.appendChild(li);
     });
 
-    // Vložit hned za h1 (nadpis stránky) — před zbytkem obsahu
-    const pageH1 = pageContentEl.querySelector('h1');
-    if (pageH1 && pageH1.nextSibling) {
-      pageContentEl.insertBefore(ul, pageH1.nextSibling);
-    } else if (pageH1) {
-      pageContentEl.appendChild(ul);
+    // Insert before first h2 or append
+    const firstH2 = pageContentEl.querySelector('h2');
+    if (firstH2) {
+      pageContentEl.insertBefore(ul, firstH2);
     } else {
-      pageContentEl.prepend(ul);
+      pageContentEl.appendChild(ul);
     }
 
     // Activate internal links within news items
