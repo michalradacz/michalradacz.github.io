@@ -38,6 +38,14 @@ Multisection
 
 ## ✏️Moje oficiální nástroje
 
+Propadl jsem wibecodingu ještě v době, kdy to nebylo cool. A rád a často vbuď tvořím nástroje a nebo se na jejich vývoji podílím.
+
+
+- [Nástroje EGdílny](https://nastroje.egdilna.cz) je web věnovaný pokročilým nástrojům, které dosud vytvářím hlavně já. Je jich tam přes 20 a jsou různé, od editoru pro ArchiMate pro architekty až po databázové nástroje a nebo třeba přístupný audio a video editor.
+- I tady jsou moje různé experimenty
+- Mám [GitHub](https://github.com/michalradacz), kde je toho daleko víc a i projekty, na kterých se jen drobně skromně podílím, jako je třeba Archi, PlantUML a Další.
+- A i tenhle redakční miniCMS systém ve kterém je dělaný tento web [MD2web](https://michalrada.cz/md2web)
+
 ## ✏️Šílené experimenty
 
 Protože mi stran funkcí a třeba i přístupnosti nevyhovují a dost často ani nefungují klasické nástroje, tak jsem se pustil do několika experimentů, kterými jednak trénuju svoje dev skilly a taky tím ukazuju, že i zdánlivě neřešitelné se dá udělat jednoduše a přístupně.
@@ -50,9 +58,25 @@ Na mém YouTube kanálu
 
 - [x] opravit odkaz audiopodcastu k vibecodingu
 
-# Blogísek
+# Články
 
 articles
+
+## Přejmenoval jsem Blogísek na Články
+
+Datum: 6.7.2026
+
+Tagy: Bleskovky
+
+Ano, uznávám, že s tím **Blogísek** jsem to trochu přehnal. Jo jako jsem infantilní, ale ne zase tak moc. Vyhledal jsem si Blogísek na Google a… Jdu za kamarádkou psychiatričkou pro vagon prášků a … Přejmenoval jsem. A jsem tomu rád, tohohle se fakt účastnit nechci :-)
+
+## Další cestovatelský tip: Mlíčňák v Soběslavi je fakt mlíčňák
+
+Datum: 5.7.2026
+
+Tagy: dobrůtky, mňam, výlet
+
+V Soběslavi jsem já (jo fakt já sám díky popiskům ve VoiceVista) objevil klenot. A tím je bar nesoucí příznačný název Mlíčňák. Jako fakt, najděte si to - stojí to za to. Fakt tam mají mléčný koktejly a další věci. Prostě fakt mlíčňák.
 
 ## Díky za přáníčka
 
