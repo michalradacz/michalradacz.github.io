@@ -1,5 +1,6 @@
 # Aktuality
 
+
 22.6.2026: [Audiopodcast Moc moc moc díky za přáníčka - YouTube](https://www.youtube.com/watch?v=ISEW1GW57N4)
 
 
@@ -8,13 +9,12 @@
 
 5.6.2026: I tady jsou články, tedy můj [blogísek](#blogisek). Udělal jsem ve svém miniCMS redakčním systému [MD2web](https://michalradacz.github.io/md2web) pro to novou funkcí Články (Articles) a tak to samozŕejmě hned musím vyzkoušet i u sebe. Postupně migruju zajímavý obsah z micro.blogu.
 
-
-
 # Já...
 
 multisection
 
 ## Já jsem
+
 
 Já žiju. Sice [nevidím](#ja-nevidim), ale normálně [pracuju](#ja-pracuju) a [bavím se](#ja-se-bavim), jako IT novinář taky [publikuju](#ja-publikuju), i jinak [tvořím](#ja-tvorim), hraju s technikou a tak vůbec...
 
@@ -24,19 +24,30 @@ Jmenuju se Michal Rada, narodil jsem se v roce 1979 (takže už jsem asi boomer,
 
 ## ✏️Já pracuju
 
+
+
 ## ✏️Já hasičím
+
+
 
 ## ✏️Já tvořím
 
+
+
 ## ✏️Já publikuju
+
+
 
 ## ✏️Já nevidím
 
+
+
 # ✏️Výtvory
 
-Multisection
+multisection
 
 ## ✏️Moje oficiální nástroje
+
 
 Propadl jsem wibecodingu ještě v době, kdy to nebylo cool. A rád a často vbuď tvořím nástroje a nebo se na jejich vývoji podílím.
 
@@ -47,6 +58,7 @@ Propadl jsem wibecodingu ještě v době, kdy to nebylo cool. A rád a často vb
 - A i tenhle redakční miniCMS systém ve kterém je dělaný tento web [MD2web](https://michalrada.cz/md2web)
 
 ## ✏️Šílené experimenty
+
 
 Protože mi stran funkcí a třeba i přístupnosti nevyhovují a dost často ani nefungují klasické nástroje, tak jsem se pustil do několika experimentů, kterými jednak trénuju svoje dev skilly a taky tím ukazuju, že i zdánlivě neřešitelné se dá udělat jednoduše a přístupně.
 
@@ -147,6 +159,7 @@ Za mě docela povedená akce. Zpočátku jsem sám dost tápal, jak k téhle sku
 Migrováno z původního webu na micro.blog
 
 # Jsem na...
+
 
 Jsem na 
 
