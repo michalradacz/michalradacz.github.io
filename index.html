@@ -878,8 +878,10 @@ mark.critic {
   font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: .35rem;
+  margin: 0 0 .35rem;
+  padding: 0;
   line-height: 1.3;
+  border: none;
 }
 .article-card-title a {
   color: var(--color-primary);
@@ -1389,14 +1391,21 @@ const Engine = (() => {
   let currentSection = null;
 
   // --- Fetch helpers ---
+  // Cache-busting: append a timestamp query param and disable the HTTP cache,
+  // so every page load always gets the current website.json / website.md /
+  // sidebar.md — not a stale cached copy from the browser or an intermediate CDN.
+  function bustCache(url) {
+    const sep = url.includes('?') ? '&' : '?';
+    return url + sep + '_=' + Date.now();
+  }
   async function fetchText(url) {
-    const r = await fetch(url);
+    const r = await fetch(bustCache(url), { cache: 'no-store' });
     if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
     const text = await r.text();
     return text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   }
   async function fetchJSON(url) {
-    const r = await fetch(url);
+    const r = await fetch(bustCache(url), { cache: 'no-store' });
     if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
     return r.json();
   }
@@ -2234,8 +2243,8 @@ const Engine = (() => {
 
   // Format article date
   function formatArticleDate(art) {
-    if (art.date) return formatNewsDate(art.date).dateStr;
-    return art.dateRaw || '';
+    if (art.date) return formatNewsDate(art.date);
+    return { dow: '', dateStr: art.dateRaw || '' };
   }
 
   function clearSidebarPanels() {
@@ -2300,17 +2309,19 @@ const Engine = (() => {
       pageContent.innerHTML = headerHTML + `<p>${lang.no_articles || 'Žádné články pro tento tag.'}</p>`;
     } else {
       const listHTML = filtered.map(art => {
-        const dateStr = formatArticleDate(art);
+        const { dow: artDow, dateStr: artDateStr } = formatArticleDate(art);
         const tagsHTML = art.tags.map(t =>
           `<button class="tag-badge${activeTag && t.toLowerCase() === activeTag.toLowerCase() ? ' active' : ''}" type="button" data-tag="${escAttr(t)}">${escHtml(t)}</button>`
         ).join(' ');
         return `<li class="article-card" data-slug="${escAttr(art.slug)}">
-          <div class="article-card-title"><a href="#${escAttr(sec.slug)}/${escAttr(art.slug)}">${escHtml(art.title)}</a></div>
-          <div class="article-card-meta">
-            ${dateStr ? `<span class="article-card-date">📅 ${escHtml(dateStr)}</span>` : ''}
-            ${tagsHTML}
-          </div>
-          <div class="article-card-perex">${art.parsedPerex}</div>
+          <article aria-labelledby="art-title-${escAttr(art.slug)}">
+            <h2 class="article-card-title" id="art-title-${escAttr(art.slug)}"><a href="#${escAttr(sec.slug)}/${escAttr(art.slug)}">${escHtml(art.title)}</a></h2>
+            <div class="article-card-meta">
+              ${artDateStr ? `<span class="article-card-date">📅 ${artDow ? `<span class="news-dow">${escHtml(artDow)}</span> ` : ''}<span class="news-date">${escHtml(artDateStr)}</span></span>` : ''}
+              ${tagsHTML}
+            </div>
+            <div class="article-card-perex">${art.parsedPerex}</div>
+          </article>
         </li>`;
       }).join('');
       pageContent.innerHTML = headerHTML + `<ul class="articles-list" aria-label="${lang.articles_list || 'Seznam článků'}">${listHTML}</ul>`;
@@ -2344,20 +2355,22 @@ const Engine = (() => {
     const pageContent = document.getElementById('page-content');
     clearSidebarPanels();
 
-    const dateStr = formatArticleDate(art);
+    const { dow: artDow, dateStr: artDateStr } = formatArticleDate(art);
     const tagsHTML = art.tags.map(t =>
       `<button class="tag-badge" type="button" data-tag="${escAttr(t)}">${escHtml(t)}</button>`
     ).join(' ');
 
     pageContent.innerHTML =
       `<a class="article-back" href="#${escAttr(sec.slug)}">← ${escHtml(lang.back_to_list || 'Zpět na seznam')}</a>` +
-      `<h1 class="page-title">${escHtml(art.title)}</h1>` +
+      `<article aria-labelledby="art-detail-title">` +
+      `<h1 class="page-title" id="art-detail-title">${escHtml(art.title)}</h1>` +
       `<div class="article-detail-meta">` +
-        (dateStr ? `<span>📅 ${escHtml(dateStr)}</span>` : '') +
+        (artDateStr ? `<span class="article-card-date">📅 ${artDow ? `<span class="news-dow">${escHtml(artDow)}</span> ` : ''}<span class="news-date">${escHtml(artDateStr)}</span></span>` : '') +
         tagsHTML +
       `</div>` +
       (art.parsedPerex ? `<p class="article-perex">${art.parsedPerex}</p>` : '') +
-      art.parsedBody;
+      art.parsedBody +
+      `</article>`;
 
     // Events
     pageContent.querySelector('.article-back').addEventListener('click', e => {
